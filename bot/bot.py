@@ -1,10 +1,10 @@
 import asyncio
+import json
 import logging
 import os
 from datetime import datetime
 
-from aiohttp import web
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters import CommandStart
 from aiogram.types import (
     InlineKeyboardButton,
@@ -45,27 +45,27 @@ async def cmd_start(message: types.Message):
     )
 
 
-# --- HTTP-сервер для приёма заявок ---
-
-async def handle_request(request: web.Request) -> web.Response:
+@dp.message(F.web_app_data)
+async def handle_web_app_data(message: types.Message):
     try:
-        data = await request.json()
-    except Exception:
-        return web.json_response({"ok": False, "error": "Invalid JSON"}, status=400)
+        data = json.loads(message.web_app_data.data)
+    except (json.JSONDecodeError, AttributeError):
+        logger.error("Invalid web_app_data received")
+        return
 
     name = data.get("name", "—")
     email = data.get("email", "—")
     phone = data.get("phone", "—")
     company = data.get("company", "—")
-    tg_user_id = data.get("tg_user_id", "")
-    tg_username = data.get("tg_username", "")
 
+    user = message.from_user
     now = datetime.now().strftime("%d.%m.%Y %H:%M")
+
     tg_info = ""
-    if tg_username:
-        tg_info = f"\nTelegram: @{tg_username} (ID: {tg_user_id})"
-    elif tg_user_id:
-        tg_info = f"\nTelegram ID: {tg_user_id}"
+    if user.username:
+        tg_info = f"\nTelegram: @{user.username} (ID: {user.id})"
+    else:
+        tg_info = f"\nTelegram ID: {user.id}"
 
     text = (
         f"📩 <b>Новая заявка</b>\n\n"
@@ -79,46 +79,13 @@ async def handle_request(request: web.Request) -> web.Response:
 
     try:
         await bot.send_message(chat_id=ADMIN_CHAT_ID, text=text, parse_mode="HTML")
+        await message.answer("Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.")
     except Exception as e:
         logger.error(f"Failed to send message to admin: {e}")
-        return web.json_response({"ok": False, "error": "Bot error"}, status=500)
-
-    return web.json_response({"ok": True})
-
-
-async def handle_cors_preflight(request: web.Request) -> web.Response:
-    return web.Response(
-        status=200,
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "POST, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type",
-        },
-    )
-
-
-@web.middleware
-async def cors_middleware(request, handler):
-    response = await handler(request)
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
-    return response
+        await message.answer("Произошла ошибка при отправке заявки. Попробуйте позже.")
 
 
 async def main():
-    # HTTP-сервер
-    app = web.Application(middlewares=[cors_middleware])
-    app.router.add_post("/api/request", handle_request)
-    app.router.add_route("OPTIONS", "/api/request", handle_cors_preflight)
-
-    runner = web.AppRunner(app)
-    await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", 8080)
-    await site.start()
-    logger.info("HTTP server started on port 8080")
-
-    # Telegram polling
     logger.info("Starting bot polling...")
     await dp.start_polling(bot)
 

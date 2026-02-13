@@ -1,60 +1,24 @@
 import { useState } from "react";
 import WebApp from "@twa-dev/sdk";
 
-const API_URL = import.meta.env.VITE_API_URL || "";
-
 export default function RequestForm() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "" });
-  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus("sending");
+    setError(false);
 
     try {
-      const tgUser = WebApp.initDataUnsafe?.user;
-      const payload = {
-        ...form,
-        tg_user_id: tgUser?.id,
-        tg_username: tgUser?.username,
-      };
-
-      const res = await fetch(`${API_URL}/api/request`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error("Ошибка сервера");
-
-      setStatus("success");
-      setForm({ name: "", email: "", phone: "", company: "" });
-
-      WebApp.HapticFeedback.notificationOccurred("success");
+      WebApp.sendData(JSON.stringify(form));
     } catch {
-      setStatus("error");
-      WebApp.HapticFeedback.notificationOccurred("error");
+      setError(true);
     }
   };
-
-  if (status === "success") {
-    return (
-      <section className="request-form">
-        <div className="request-form__success">
-          <span className="request-form__success-icon">✓</span>
-          <h3>Заявка отправлена!</h3>
-          <p>Мы свяжемся с вами в ближайшее время.</p>
-          <button className="btn btn--secondary" onClick={() => setStatus("idle")}>
-            Отправить ещё
-          </button>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section className="request-form">
@@ -98,11 +62,11 @@ export default function RequestForm() {
           className="input"
         />
 
-        <button type="submit" className="btn btn--primary" disabled={status === "sending"}>
-          {status === "sending" ? "Отправка..." : "Оставить заявку"}
+        <button type="submit" className="btn btn--primary">
+          Оставить заявку
         </button>
 
-        {status === "error" && (
+        {error && (
           <p className="request-form__error">Не удалось отправить. Попробуйте ещё раз.</p>
         )}
       </form>
