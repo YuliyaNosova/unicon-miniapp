@@ -1,63 +1,81 @@
+/* ===== Brand Colors ===== */
+:root {
+  --unicon-blue: #0F1955;
+  --global-blue: #22409A;
+  --planet-green: #00EE69;
+  --white: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.07);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-muted: rgba(255, 255, 255, 0.45);
+  --text-sub: rgba(255, 255, 255, 0.4);
+}
+
 /* ===== Layout ===== */
 .app {
   max-width: 100%;
-  padding: 0 16px 32px;
-  color: var(--tg-theme-text-color, #1a1a1a);
-  background: var(--tg-theme-bg-color, #ffffff);
   min-height: 100vh;
+  background: var(--unicon-blue);
+  color: var(--white);
+  padding-bottom: 32px;
 }
 
 .section-title {
-  font-size: 18px;
+  font-size: 11px;
   font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-sub);
   margin: 0 0 12px;
-  color: var(--tg-theme-text-color, #1a1a1a);
 }
 
 /* ===== Header ===== */
 .header {
   text-align: center;
-  padding: 24px 0 16px;
+  padding: 28px 20px 20px;
 }
 
 .header__logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--tg-theme-button-color, #2481cc);
-  color: var(--tg-theme-button-text-color, #fff);
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--planet-green) 0%, #00c454 100%);
+  color: var(--unicon-blue);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 12px;
+  font-weight: 800;
+  margin-bottom: 16px;
 }
 
 .header__title {
-  font-size: 22px;
-  font-weight: 700;
-  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  margin: 0 0 4px;
+}
+
+.header__badge {
+  font-size: 12px;
+  color: var(--planet-green);
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
 }
 
 .header__subtitle {
   font-size: 13px;
-  line-height: 1.4;
-  color: var(--tg-theme-hint-color, #999);
+  color: var(--text-muted);
+  line-height: 1.5;
   margin: 0;
   padding: 0 8px;
 }
 
-/* ===== About ===== */
+/* ===== About / Stats ===== */
 .about {
-  margin-top: 24px;
-}
-
-.about__text {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--tg-theme-text-color, #1a1a1a);
-  margin: 0 0 16px;
+  padding: 0 20px 20px;
 }
 
 .about__stats {
@@ -67,29 +85,31 @@
 }
 
 .stat {
-  background: var(--tg-theme-secondary-bg-color, #f0f0f0);
-  border-radius: 12px;
-  padding: 14px 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px 12px;
   text-align: center;
 }
 
 .stat__value {
   display: block;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--tg-theme-button-color, #2481cc);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--planet-green);
 }
 
 .stat__label {
   display: block;
-  font-size: 12px;
-  color: var(--tg-theme-hint-color, #999);
-  margin-top: 2px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.3;
 }
 
 /* ===== Services ===== */
 .services {
-  margin-top: 24px;
+  padding: 0 20px 20px;
 }
 
 .services__list {
@@ -99,72 +119,122 @@
 }
 
 .service-card {
-  background: var(--tg-theme-secondary-bg-color, #f0f0f0);
-  border-radius: 12px;
-  padding: 14px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
 }
 
 .service-card__icon {
-  font-size: 24px;
-  display: block;
-  margin-bottom: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(0, 238, 105, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .service-card__title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
-  margin: 0 0 4px;
+  color: var(--white);
+  margin: 0 0 3px;
 }
 
 .service-card__desc {
-  font-size: 13px;
+  font-size: 12px;
+  color: var(--text-muted);
   line-height: 1.4;
-  color: var(--tg-theme-hint-color, #999);
   margin: 0;
+}
+
+/* ===== CTA Button ===== */
+.cta-wrap {
+  padding: 4px 20px 20px;
+}
+
+.btn--cta {
+  display: block;
+  width: 100%;
+  background: var(--planet-green);
+  color: var(--unicon-blue);
+  border: none;
+  border-radius: 16px;
+  padding: 17px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn--cta:active {
+  opacity: 0.85;
 }
 
 /* ===== Contacts ===== */
 .contacts {
-  margin-top: 24px;
+  padding: 0 20px 20px;
 }
 
 .contacts__item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .contacts__icon {
-  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.contacts__link {
-  font-size: 14px;
-  color: var(--tg-theme-link-color, #2481cc);
-  text-decoration: none;
+.contacts__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
+.contacts__label {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.contacts__link,
 .contacts__text {
   font-size: 14px;
-  color: var(--tg-theme-text-color, #1a1a1a);
+  font-weight: 500;
+  color: var(--white);
+  text-decoration: none;
 }
 
 .contacts__socials {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .contacts__social {
+  flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 20px;
-  border-radius: 10px;
-  background: var(--tg-theme-secondary-bg-color, #f0f0f0);
-  color: var(--tg-theme-link-color, #2481cc);
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--planet-green);
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
@@ -172,7 +242,7 @@
 
 /* ===== Request Form ===== */
 .request-form {
-  margin-top: 28px;
+  padding: 0 20px 20px;
 }
 
 .request-form__form {
@@ -183,34 +253,35 @@
 
 .input {
   width: 100%;
-  padding: 12px 14px;
-  border: 1.5px solid var(--tg-theme-secondary-bg-color, #e0e0e0);
-  border-radius: 10px;
-  background: var(--tg-theme-bg-color, #fff);
-  color: var(--tg-theme-text-color, #1a1a1a);
-  font-size: 15px;
+  padding: 14px 16px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: var(--white);
+  font-size: 14px;
   outline: none;
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
 
 .input:focus {
-  border-color: var(--tg-theme-button-color, #2481cc);
+  border-color: var(--planet-green);
 }
 
 .input::placeholder {
-  color: var(--tg-theme-hint-color, #999);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* ===== Buttons ===== */
 .btn {
-  padding: 14px;
+  padding: 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: opacity 0.2s;
+  width: 100%;
 }
 
 .btn:disabled {
@@ -219,17 +290,18 @@
 }
 
 .btn--primary {
-  background: var(--tg-theme-button-color, #2481cc);
-  color: var(--tg-theme-button-text-color, #fff);
+  background: var(--planet-green);
+  color: var(--unicon-blue);
 }
 
 .btn--secondary {
-  background: var(--tg-theme-secondary-bg-color, #f0f0f0);
-  color: var(--tg-theme-button-color, #2481cc);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--white);
 }
 
 .btn:active:not(:disabled) {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 /* ===== Success ===== */
@@ -242,29 +314,30 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: #34c759;
-  color: #fff;
-  font-size: 24px;
+  background: var(--planet-green);
+  color: var(--unicon-blue);
+  font-size: 26px;
   margin-bottom: 12px;
 }
 
 .request-form__success h3 {
   margin: 0 0 6px;
   font-size: 18px;
+  color: var(--white);
 }
 
 .request-form__success p {
   font-size: 14px;
-  color: var(--tg-theme-hint-color, #999);
+  color: var(--text-muted);
   margin: 0 0 16px;
 }
 
 /* ===== Error ===== */
 .request-form__error {
-  color: #ff3b30;
+  color: #ff6b6b;
   font-size: 13px;
   text-align: center;
   margin: 4px 0 0;
