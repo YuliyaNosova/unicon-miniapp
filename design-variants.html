@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unicon Outsourcing — Варианты дизайна Mini App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ======= BRAND COLORS ======= */
+    :root {
+      --unicon-blue: #0F1955;
+      --global-blue: #22409A;
+      --planet-green: #00EE69;
+      --white: #ffffff;
+      --dark-grey: #414141;
+      --light-grey: #E7E7E7;
+      --mid-grey: #9a9a9a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #f2f4f8;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #1a1a1a;
+    }
+
+    /* ======= PAGE LAYOUT ======= */
+    .page-header {
+      background: var(--unicon-blue);
+      color: white;
+      text-align: center;
+      padding: 48px 24px 32px;
+    }
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .page-header p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+    }
+    .brand-strip {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .color-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+    .color-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .variants-grid {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 48px 24px;
+      flex-wrap: wrap;
+    }
+
+    .variant-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .variant-label {
+      text-align: center;
+    }
+    .variant-label h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--unicon-blue);
+    }
+    .variant-label p {
+      font-size: 13px;
+      color: var(--mid-grey);
+      margin-top: 4px;
+    }
+    .variant-tags {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--light-grey);
+      color: var(--dark-grey);
+    }
+
+    /* ======= PHONE FRAME ======= */
+    .phone-frame {
+      width: 375px;
+      height: 720px;
+      border-radius: 44px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(15,25,85,0.25), 0 8px 24px rgba(0,0,0,0.1);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .phone-screen::-webkit-scrollbar { display: none; }
+
+    /* ============================================
+       VARIANT 1 — DARK PREMIUM
+       Background: Unicon Blue, accents: Planet Green
+    ============================================ */
+    .v1 {
+      background: var(--unicon-blue);
+      color: var(--white);
+    }
+    .v1 .tg-bar {
+      height: 44px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.3px;
+      flex-shrink: 0;
+    }
+    .v1 .header {
+      padding: 28px 20px 20px;
+      text-align: center;
+    }
+    .v1 .logo-mark {
+      width: 64px; height: 64px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--planet-green) 0%, #00c454 100%);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 28px; font-weight: 800; color: var(--unicon-blue);
+    }
+    .v1 .company-name {
+      font-size: 26px; font-weight: 800;
+      color: white;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .v1 .company-sub {
+      font-size: 12px;
+      color: var(--planet-green);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .v1 .tagline {
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+    .v1 .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 0 20px 20px;
+    }
+    .v1 .stat-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .v1 .stat-val {
+      font-size: 28px; font-weight: 800;
+      color: var(--planet-green);
+    }
+    .v1 .stat-lbl {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+      line-height: 1.3;
+    }
+    .v1 .section { padding: 0 20px 20px; }
+    .v1 .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .v1 .service-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 10px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .v1 .svc-icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: rgba(0,238,105,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .v1 .svc-title { font-size: 14px; font-weight: 600; color: white; margin-bottom: 3px; }
+    .v1 .svc-desc { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.4; }
+    .v1 .cta-btn {
+      display: block; margin: 4px 20px 20px;
+      background: var(--planet-green);
+      color: var(--unicon-blue);
+      border: none; border-radius: 16px;
+      padding: 17px;
+      font-size: 15px; font-weight: 700;
+      text-align: center; cursor: pointer;
+      width: calc(100% - 40px);
+    }
+    .v1 .contacts-section { padding: 0 20px 32px; }
+    .v1 .contact-item {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 14px;
+    }
+    .v1 .contact-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .v1 .contact-text { font-size: 13px; color: rgba(255,255,255,0.6); }
+    .v1 .contact-val { font-size: 14px; font-weight: 500; color: white; }
+    .v1 .input-field {
+      width: 100%; padding: 14px 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; color: white;
+      font-size: 14px; margin-bottom: 10px;
+      outline: none;
+    }
+    .v1 .input-field::placeholder { color: rgba(255,255,255,0.3); }
+
+    /* ============================================
+       VARIANT 2 — CLEAN WHITE
+    ============================================ */
+    .v2 {
+      background: #F6F8FF;
+      color: var(--unicon-blue);
+    }
+    .v2 .tg-bar {
+      height: 44px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--mid-grey);
+      border-bottom: 1px solid #eee;
+      flex-shrink: 0;
+    }
+    .v2 .header {
+      background: white;
+      padding: 28px 20px 24px;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .v2 .logo-mark {
+      width: 64px; height: 64px;
+      border-radius: 20px;
+      background: var(--unicon-blue);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 28px; font-weight: 800; color: var(--planet-green);
+      box-shadow: 0 8px 24px rgba(15,25,85,0.3);
+    }
+    .v2 .company-name {
+      font-size: 24px; font-weight: 800;
+      color: var(--unicon-blue);
+      letter-spacing: -0.5px;
+    }
+    .v2 .company-sub {
+      font-size: 12px;
+      color: var(--global-blue);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+    .v2 .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      background: var(--unicon-blue);
+    }
+    .v2 .stat-card {
+      padding: 16px 8px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .v2 .stat-card:last-child { border-right: none; }
+    .v2 .stat-val {
+      font-size: 20px; font-weight: 800;
+      color: var(--planet-green);
+    }
+    .v2 .stat-lbl {
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+    .v2 .content { padding: 20px; }
+    .v2 .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--unicon-blue);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .v2 .section-title::before {
+      content: '';
+      display: block; width: 4px; height: 20px;
+      background: var(--planet-green);
+      border-radius: 2px;
+    }
+    .v2 .about-text {
+      font-size: 14px; line-height: 1.6;
+      color: var(--dark-grey);
+      margin-bottom: 20px;
+    }
+    .v2 .service-card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 10px;
+      display: flex; gap: 14px; align-items: flex-start;
+      box-shadow: 0 2px 12px rgba(15,25,85,0.07);
+    }
+    .v2 .svc-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: #EEF2FF;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .v2 .svc-title { font-size: 14px; font-weight: 600; color: var(--unicon-blue); margin-bottom: 4px; }
+    .v2 .svc-desc { font-size: 12px; color: var(--mid-grey); line-height: 1.4; }
+    .v2 .divider { height: 1px; background: #eee; margin: 20px 0; }
+    .v2 .cta-btn {
+      display: block;
+      background: var(--unicon-blue);
+      color: white; border: none; border-radius: 16px;
+      padding: 17px; font-size: 15px; font-weight: 700;
+      text-align: center; cursor: pointer; width: 100%;
+      margin-bottom: 10px;
+    }
+    .v2 .cta-btn-outline {
+      display: block;
+      background: white;
+      color: var(--unicon-blue);
+      border: 2px solid var(--unicon-blue);
+      border-radius: 16px;
+      padding: 15px; font-size: 15px; font-weight: 600;
+      text-align: center; cursor: pointer; width: 100%;
+      margin-bottom: 20px;
+    }
+    .v2 .contact-item {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .v2 .contact-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: #EEF2FF;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .v2 .contact-text { font-size: 12px; color: var(--mid-grey); }
+    .v2 .contact-val { font-size: 14px; font-weight: 500; color: var(--unicon-blue); }
+    .v2 .form-section { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 2px 12px rgba(15,25,85,0.07); }
+    .v2 .input-field {
+      width: 100%; padding: 13px 16px;
+      background: #F6F8FF;
+      border: 1.5px solid #E0E6FF;
+      border-radius: 12px; color: var(--unicon-blue);
+      font-size: 14px; margin-bottom: 10px; outline: none;
+    }
+    .v2 .input-field::placeholder { color: #aab; }
+
+    /* ============================================
+       VARIANT 3 — GRADIENT VIBRANT
+    ============================================ */
+    .v3 {
+      background: linear-gradient(160deg, var(--unicon-blue) 0%, var(--global-blue) 50%, #1a3a8a 100%);
+      color: white;
+    }
+    .v3 .tg-bar {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+    .v3 .hero {
+      padding: 16px 20px 32px;
+      text-align: center;
+      position: relative;
+    }
+    .v3 .planet-bg {
+      position: absolute;
+      top: -20px; right: -30px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,238,105,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .v3 .logo-row {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+      margin-bottom: 16px;
+    }
+    .v3 .logo-mark {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; font-weight: 800;
+      color: var(--planet-green);
+    }
+    .v3 .logo-text { text-align: left; }
+    .v3 .company-name {
+      font-size: 22px; font-weight: 800; color: white;
+      letter-spacing: -0.3px;
+    }
+    .v3 .company-sub {
+      font-size: 11px;
+      color: var(--planet-green);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .v3 .tagline {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .v3 .green-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,238,105,0.15);
+      border: 1px solid rgba(0,238,105,0.3);
+      border-radius: 100px; padding: 6px 14px;
+      font-size: 12px; color: var(--planet-green); font-weight: 600;
+    }
+    .v3 .stats-row {
+      display: flex; gap: 10px; margin: 0 20px 24px;
+    }
+    .v3 .stat-card {
+      flex: 1;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px; padding: 14px 10px;
+      text-align: center;
+    }
+    .v3 .stat-val {
+      font-size: 24px; font-weight: 800;
+      background: linear-gradient(135deg, #00EE69, #00ff87);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .v3 .stat-lbl {
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 3px; line-height: 1.3;
+    }
+    .v3 .card-section {
+      margin: 0 20px 20px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px; overflow: hidden;
+    }
+    .v3 .card-header {
+      padding: 16px 16px 0;
+      font-size: 13px; font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .v3 .service-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .v3 .service-item:last-child { border-bottom: none; }
+    .v3 .svc-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--planet-green); flex-shrink: 0;
+    }
+    .v3 .svc-name { font-size: 14px; font-weight: 500; color: white; flex: 1; }
+    .v3 .svc-arrow { color: rgba(255,255,255,0.3); font-size: 16px; }
+    .v3 .cta-section { padding: 0 20px 20px; }
+    .v3 .cta-btn {
+      display: block;
+      background: var(--planet-green);
+      color: var(--unicon-blue);
+      border: none; border-radius: 16px;
+      padding: 17px; font-size: 15px; font-weight: 700;
+      text-align: center; cursor: pointer; width: 100%;
+      margin-bottom: 10px;
+    }
+    .v3 .contacts-card {
+      margin: 0 20px 20px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 16px;
+    }
+    .v3 .contact-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .v3 .contact-row:last-child { margin-bottom: 0; }
+    .v3 .cont-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(0,238,105,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .v3 .cont-info { font-size: 13px; color: rgba(255,255,255,0.5); }
+    .v3 .cont-val { font-size: 14px; font-weight: 500; color: white; }
+    .v3 .form-card {
+      margin: 0 20px 32px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 20px;
+    }
+    .v3 .form-title { font-size: 16px; font-weight: 700; color: white; margin-bottom: 14px; }
+    .v3 .input-field {
+      width: 100%; padding: 13px 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; color: white;
+      font-size: 14px; margin-bottom: 10px; outline: none;
+    }
+    .v3 .input-field::placeholder { color: rgba(255,255,255,0.35); }
+    .v3 .submit-btn {
+      width: 100%; padding: 15px;
+      background: white; color: var(--unicon-blue);
+      border: none; border-radius: 12px;
+      font-size: 15px; font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ============================================
+       ACTIVE TAB INDICATOR
+    ============================================ */
+    .variant-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .nav-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--light-grey);
+      transition: all 0.3s;
+    }
+    .nav-dot.active {
+      width: 24px;
+      border-radius: 4px;
+      background: var(--unicon-blue);
+    }
+
+    /* ======= LEGEND ======= */
+    .legend {
+      background: white;
+      border-top: 1px solid #eee;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .legend h3 { font-size: 20px; font-weight: 700; color: var(--unicon-blue); margin-bottom: 24px; }
+    .legend-grid {
+      display: flex; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .legend-item { text-align: center; }
+    .legend-swatch {
+      width: 48px; height: 48px;
+      border-radius: 12px; margin: 0 auto 8px;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    .legend-name { font-size: 12px; font-weight: 700; color: var(--dark-grey); }
+    .legend-hex { font-size: 11px; color: var(--mid-grey); font-family: monospace; }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Unicon Outsourcing — Mini App</h1>
+  <p>3 варианта дизайна на основе брендбука Unicon Outsourcing</p>
+  <div class="brand-strip">
+    <div class="color-chip">
+      <div class="color-dot" style="background:#0F1955"></div>
+      Unicon Blue #0F1955
+    </div>
+    <div class="color-chip">
+      <div class="color-dot" style="background:#22409A"></div>
+      Global Blue #22409A
+    </div>
+    <div class="color-chip">
+      <div class="color-dot" style="background:#00EE69"></div>
+      Planet Green #00EE69
+    </div>
+    <div class="color-chip">
+      <div class="color-dot" style="background:#414141; border-color:#555"></div>
+      Dark Grey #414141
+    </div>
+  </div>
+</div>
+
+<div class="variants-grid">
+
+  <!-- ======================== VARIANT 1 ======================== -->
+  <div class="variant-wrapper">
+    <div class="variant-label">
+      <h2>Вариант 1 — Dark Premium</h2>
+      <p>Тёмный фон Unicon Blue, акценты Planet Green</p>
+      <div class="variant-tags">
+        <span class="tag">Премиум</span>
+        <span class="tag">Строгий</span>
+        <span class="tag">Корпоративный</span>
+      </div>
+    </div>
+    <div class="phone-frame">
+      <div class="phone-screen v1">
+        <div class="tg-bar">Unicon Outsourcing</div>
+        <div class="header">
+          <div class="logo-mark">U</div>
+          <div class="company-name">Unicon</div>
+          <div class="company-sub">Outsourcing</div>
+          <div class="tagline">Аутсорсинг бизнес-процессов<br>для крупных и средних компаний</div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-val">20+</div>
+            <div class="stat-lbl">лет на рынке</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">500+</div>
+            <div class="stat-lbl">клиентов</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">500+</div>
+            <div class="stat-lbl">экспертов</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">700+</div>
+            <div class="stat-lbl">проектов</div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">Услуги</div>
+          <div class="service-card">
+            <div class="svc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00EE69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                <polyline points="7 8 10 11 13 8 17 12"/>
+              </svg>
+            </div>
+            <div>
+              <div class="svc-title">Бухгалтерский учёт</div>
+              <div class="svc-desc">Комплексное ведение, налоговый и управленческий учёт</div>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="svc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00EE69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <div class="svc-title">Кадры и зарплата</div>
+              <div class="svc-desc">Делопроизводство, расчёт зарплаты, охрана труда</div>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="svc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00EE69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+              </svg>
+            </div>
+            <div>
+              <div class="svc-title">ИТ-решения 1С</div>
+              <div class="svc-desc">Внедрение, поддержка, хостинг и аренда лицензий 1С</div>
+            </div>
+          </div>
+        </div>
+        <button class="cta-btn">Оставить заявку</button>
+        <div class="contacts-section">
+          <div class="section-title">Контакты</div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00EE69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.47 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 5.55 5.55l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-text">Телефон</div>
+              <div class="contact-val">+7 (495) 154-27-12</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00EE69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-text">Email</div>
+              <div class="contact-val">outsourcing@ubpo.ru</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00EE69" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-text">Сайт</div>
+              <div class="contact-val">ubpo.ru</div>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">Заявка</div>
+          <input class="input-field" placeholder="Ваше имя" type="text">
+          <input class="input-field" placeholder="Телефон" type="tel">
+          <input class="input-field" placeholder="Ваш вопрос" type="text">
+          <button class="cta-btn" style="margin: 0; width: 100%;">Отправить</button>
+        </div>
+      </div>
+    </div>
+    <div class="variant-nav">
+      <div class="nav-dot active"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+    </div>
+  </div>
+
+  <!-- ======================== VARIANT 2 ======================== -->
+  <div class="variant-wrapper">
+    <div class="variant-label">
+      <h2>Вариант 2 — Clean White</h2>
+      <p>Белый фон, акцентная полоса Unicon Blue</p>
+      <div class="variant-tags">
+        <span class="tag">Чистый</span>
+        <span class="tag">Официальный</span>
+        <span class="tag">Читаемый</span>
+      </div>
+    </div>
+    <div class="phone-frame">
+      <div class="phone-screen v2">
+        <div class="tg-bar">Unicon Outsourcing</div>
+        <div class="header">
+          <div class="logo-mark">U</div>
+          <div class="company-name">Unicon</div>
+          <div class="company-sub">Аутсорсинг бизнес-процессов</div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-val">20+</div>
+            <div class="stat-lbl">лет</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">500+</div>
+            <div class="stat-lbl">клиентов</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">500+</div>
+            <div class="stat-lbl">экспертов</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">700+</div>
+            <div class="stat-lbl">проектов</div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="section-title">О компании</div>
+          <div class="about-text">
+            Берём на себя регулярные задачи, предлагаем лучшие практики
+            и оптимизируем бизнес-процессы крупных и средних компаний.
+          </div>
+          <div class="section-title">Услуги</div>
+          <div class="service-card">
+            <div class="svc-icon">📊</div>
+            <div>
+              <div class="svc-title">Бухгалтерский учёт</div>
+              <div class="svc-desc">Комплексное ведение, налоговый и управленческий учёт</div>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="svc-icon">👥</div>
+            <div>
+              <div class="svc-title">Кадры и зарплата</div>
+              <div class="svc-desc">Делопроизводство, расчёт зарплаты, охрана труда</div>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="svc-icon">💻</div>
+            <div>
+              <div class="svc-title">ИТ-решения 1С</div>
+              <div class="svc-desc">Внедрение, поддержка, хостинг и аренда лицензий 1С</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="section-title">Контакты</div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-text">Телефон</div>
+              <div class="contact-val">+7 (495) 154-27-12</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-text">Email</div>
+              <div class="contact-val">outsourcing@ubpo.ru</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <div>
+              <div class="contact-text">Сайт</div>
+              <div class="contact-val">ubpo.ru</div>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="section-title">Оставить заявку</div>
+          <div class="form-section">
+            <input class="input-field" placeholder="Ваше имя" type="text">
+            <input class="input-field" placeholder="Телефон" type="tel">
+            <input class="input-field" placeholder="Ваш вопрос" type="text">
+            <button class="cta-btn">Отправить заявку</button>
+            <button class="cta-btn-outline">Написать менеджеру</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="variant-nav">
+      <div class="nav-dot"></div>
+      <div class="nav-dot active"></div>
+      <div class="nav-dot"></div>
+    </div>
+  </div>
+
+  <!-- ======================== VARIANT 3 ======================== -->
+  <div class="variant-wrapper">
+    <div class="variant-label">
+      <h2>Вариант 3 — Gradient Glass</h2>
+      <p>Градиент Unicon→Global Blue, glassmorphism</p>
+      <div class="variant-tags">
+        <span class="tag">Современный</span>
+        <span class="tag">Динамичный</span>
+        <span class="tag">Технологичный</span>
+      </div>
+    </div>
+    <div class="phone-frame">
+      <div class="phone-screen v3">
+        <div class="tg-bar">Unicon Outsourcing</div>
+        <div class="hero">
+          <div class="planet-bg"></div>
+          <div class="logo-row">
+            <div class="logo-mark">U</div>
+            <div class="logo-text">
+              <div class="company-name">Unicon</div>
+              <div class="company-sub">Outsourcing</div>
+            </div>
+          </div>
+          <div class="tagline">Аутсорсинг бизнес-процессов<br>для крупных и средних компаний</div>
+          <div class="green-pill">
+            <span>●</span> Активный партнёр BDO Global
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-val">20+</div>
+            <div class="stat-lbl">лет на рынке</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">500+</div>
+            <div class="stat-lbl">клиентов</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val">700+</div>
+            <div class="stat-lbl">проектов</div>
+          </div>
+        </div>
+        <div class="card-section">
+          <div class="card-header">Услуги</div>
+          <div class="service-item">
+            <div class="svc-dot"></div>
+            <div class="svc-name">Бухгалтерский учёт</div>
+            <div class="svc-arrow">›</div>
+          </div>
+          <div class="service-item">
+            <div class="svc-dot"></div>
+            <div class="svc-name">Кадры и расчёт зарплаты</div>
+            <div class="svc-arrow">›</div>
+          </div>
+          <div class="service-item">
+            <div class="svc-dot"></div>
+            <div class="svc-name">ИТ-решения и поддержка 1С</div>
+            <div class="svc-arrow">›</div>
+          </div>
+          <div class="service-item">
+            <div class="svc-dot"></div>
+            <div class="svc-name">Юридическая поддержка</div>
+            <div class="svc-arrow">›</div>
+          </div>
+        </div>
+        <div class="cta-section">
+          <button class="cta-btn">Оставить заявку</button>
+        </div>
+        <div class="contacts-card">
+          <div class="contact-row">
+            <div class="cont-icon">📞</div>
+            <div>
+              <div class="cont-info">Телефон</div>
+              <div class="cont-val">+7 (495) 154-27-12</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="cont-icon">✉️</div>
+            <div>
+              <div class="cont-info">Email</div>
+              <div class="cont-val">outsourcing@ubpo.ru</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="cont-icon">🌐</div>
+            <div>
+              <div class="cont-info">Сайт</div>
+              <div class="cont-val">ubpo.ru</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-card">
+          <div class="form-title">Оставить заявку</div>
+          <input class="input-field" placeholder="Ваше имя" type="text">
+          <input class="input-field" placeholder="Телефон" type="tel">
+          <input class="input-field" placeholder="Ваш вопрос" type="text">
+          <button class="submit-btn">Отправить</button>
+        </div>
+      </div>
+    </div>
+    <div class="variant-nav">
+      <div class="nav-dot"></div>
+      <div class="nav-dot"></div>
+      <div class="nav-dot active"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- COLOR LEGEND -->
+<div class="legend">
+  <h3>Фирменная палитра (Брендбук Unicon Outsourcing)</h3>
+  <div class="legend-grid">
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#0F1955"></div>
+      <div class="legend-name">Unicon Blue</div>
+      <div class="legend-hex">#0F1955</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#22409A"></div>
+      <div class="legend-name">Global Blue</div>
+      <div class="legend-hex">#22409A</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#00EE69"></div>
+      <div class="legend-name">Planet Green</div>
+      <div class="legend-hex">#00EE69</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#414141"></div>
+      <div class="legend-name">Dark Grey</div>
+      <div class="legend-hex">#414141</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#E7E7E7"></div>
+      <div class="legend-name">Light Grey</div>
+      <div class="legend-hex">#E7E7E7</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-swatch" style="background:#ffffff"></div>
+      <div class="legend-name">White</div>
+      <div class="legend-hex">#FFFFFF</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
